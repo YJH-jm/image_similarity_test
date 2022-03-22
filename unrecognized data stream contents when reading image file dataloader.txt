@@ -1,0 +1,21 @@
+ File "c:/ImageCluster/image_similarity/train_AE.py", line 86, in <module>
+    encoder, decoder, train_loader, criterion, optimizer, device=device
+  File "c:\ImageCluster\image_similarity\train_engine.py", line 16, in train_step
+    for batch_idx, (train_img, target_img) in enumerate(train_loader):
+  File "C:\Users\kong\.conda\envs\reid\lib\site-packages\torch\utils\data\dataloader.py", line 517, in __next__
+    data = self._next_data()
+  File "C:\Users\kong\.conda\envs\reid\lib\site-packages\torch\utils\data\dataloader.py", line 557, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "C:\Users\kong\.conda\envs\reid\lib\site-packages\torch\utils\data\_utils\fetch.py", line 44, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "C:\Users\kong\.conda\envs\reid\lib\site-packages\torch\utils\data\_utils\fetch.py", line 44, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "C:\Users\kong\.conda\envs\reid\lib\site-packages\torch\utils\data\dataset.py", line 330, in __getitem__
+    return self.dataset[self.indices[idx]]
+  File "c:\ImageCluster\image_similarity\data.py", line 22, in __getitem__
+    img_loc = self.image_dir[idx]
+  File "C:\Users\kong\.conda\envs\reid\lib\site-packages\PIL\Image.py", line 889, in convert
+    self.load()
+  File "C:\Users\kong\.conda\envs\reid\lib\site-packages\PIL\ImageFile.py", line 272, in load
+    raise_oserror(err_code)
+  File "C:\Users\kong\.conda\envs\reid\lib\site-packages\PIL\ImageFile.py", line 67, in raise_oserror
