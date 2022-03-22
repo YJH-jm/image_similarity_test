@@ -21,7 +21,7 @@ FULL_BATCH_SIZE = 32
 TEST_DATA_PATH = "../input/korean-ReID/" # 일단 같은 이미지 확인
 EFFICIENTNET_MODEL_PATH = "../data/models/EfficientNet.pt"
 EMBEDDING_PATH = "../data/models/data_EFF_embedding_f.npy"
-# EMBEDDING_SHAPE = (1, 512, 7, 7)
+EMBEDDING_SHAPE = (1, 1280, 7, 7)
 
 # TEST_RATIO = 0.2
 

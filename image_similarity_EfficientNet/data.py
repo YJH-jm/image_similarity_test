@@ -15,7 +15,7 @@ class EfficientNetDataset(Dataset):
     def __init__(self, main_dir, transform=None): # 데이터의 전처리를 해주는 부분
         self.main_dir = main_dir
         self.transform = transform
-        self.image_dir = glob.glob(main_dir + "/**/*.png", recursive=True)[:3000] # 모든 png 파일의 이미지 경로 저장
+        self.image_dir = glob.glob(main_dir + "/**/*.png", recursive=True) # 모든 png 파일의 이미지 경로 저장
         self.classes_name = set()
         self.label = []
 
