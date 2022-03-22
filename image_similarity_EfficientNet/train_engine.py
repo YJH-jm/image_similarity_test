@@ -2,8 +2,9 @@ __all__ = ["train_step", "val_step", "create_embedding"]
 
 import torch
 import torch.nn as nn
-import model
-import config 
+import config
+from efficientnet_pytorch import EfficientNet 
+
 
 
 def train_step(model, train_loader, criterion, optimizer, device):
@@ -53,22 +54,20 @@ def val_step(model, val_loader, criterion, device):
 
 
 def create_embedding(encoder, full_loader, embedding_dim, device): # save image feature representations of all images in the dataset
-    encoder = model.VGGEncoder()
-    decoder = model.VGGDecoder(encoder.encoder)
+    model = EfficientNet()
 
     # Load the state dict of encoder
-    encoder.load_state_dict(torch.load(config.ENCODER_MODEL_PATH, map_location=device))
-    encoder.eval()
+    model.load_state_dict(torch.load(config.EFFICIENTNET_MODEL_PATH, map_location=device))
+    model.eval()
     embedding = torch.randn(embedding_dim)
     # print("check : ", embedding.shape)
 
     with torch.no_grad():
-        for batch_idx, (train_img, target_img) in enumerate(full_loader):
-            print(train_img[0])
+        for batch_idx, (train_img, target) in enumerate(full_loader):
             train_img = train_img.to(device)
-            enc_output, _ = encoder(train_img)
+            feature = model.extract_features(train_img)
             # print("embadding enc_output shape : \n", enc_output.shape) #  torch.Size([32, 256, 16, 16])
-            embedding = torch.cat((embedding, enc_output), 0)
+            embedding = torch.cat((embedding, feature), 0)
             # print("embadding embadding shape : \n", embedding.shape)
             # print("-"*30)
 

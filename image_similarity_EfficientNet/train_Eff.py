@@ -1,7 +1,6 @@
 # Training script for VGG Auto-Encoder.
 
 import torch
-import model
 import train_engine
 import torchvision.transforms as transforms
 import data
@@ -93,10 +92,6 @@ if __name__ == "__main__":
         print(f"Epochs = [{epoch+1}/{config.EPOCHS}], Validation Loss : {val_loss}, Accuracy : {val_accuracy}")
 
     # print("Training Done")
-
-    
-    # # encoder.load_state_dict(torch.load(config.ENCODER_MODEL_PATH))
-    # encoder.load_state_dict(torch.load(config.ENCODER_MODEL_PATH, map_location=device))
 
     # encoder.eval()
 
