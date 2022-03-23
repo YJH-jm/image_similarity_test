@@ -1,2 +1,3 @@
 *.pt
 input/korean-ReID
+__pycache__
