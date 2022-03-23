@@ -14,7 +14,7 @@ def train_step(model, train_loader, criterion, optimizer, device):
     # print(device)
 
     for batch_idx, (train_img, target) in enumerate(train_loader):
-        print(f"Steps : [{batch_idx}]")
+        # print(f"Steps : [{batch_idx}]")
         train_img = train_img.to(device)
         target = target.to(device)
 
@@ -36,7 +36,7 @@ def val_step(model, val_loader, criterion, device):
         correct = 0
         total = 0
         for batch_idx, (train_img, target) in enumerate(val_loader):
-            print(f"Steps : [{batch_idx}]")
+            # print(f"Steps : [{batch_idx}]")
             train_img = train_img.to(device)
             target = target.to(device)
 
@@ -44,9 +44,9 @@ def val_step(model, val_loader, criterion, device):
             loss = criterion(outputs, target)
             
             _, predicted = torch.max(outputs.data, 1)
-            print("outputs.data shape : ", outputs.data.shape)
-            print("predicted shape", predicted.shape)
-            print("predicted : ", predicted)
+            # print("outputs.data shape : ", outputs.data.shape)
+            # print("predicted shape", predicted.shape)
+            # print("predicted : ", predicted)
             total += target.size(0)
             correct += (predicted == target).sum().item()
             accuracy  = 100 * correct / total
