@@ -51,6 +51,46 @@ class EfficientNetDataset(Dataset):
         # print(type(label))
         return tensor_image, label
 
+class TestDataset(Dataset):
+    def __init__(self, main_dir, transform=None): # 데이터의 전처리를 해주는 부분
+        self.main_dir = main_dir
+        self.transform = transform
+        self.image_dir = glob.glob(main_dir + "/**/*.png", recursive=True) # 모든 png 파일의 이미지 경로 저장
+        self.classes_name = set()
+        self.label = []
+
+        for i in self.image_dir:
+            # break
+            i= i.split('\\')[2]
+            print(i)
+            
+            self.label.append(i)
+            self.classes_name.add(i)
+        self.classes_name = list(self.classes_name)
+        self.classes_name.sort()
+        # print(self.classes_name)
+        print("class의 총 수 : ", len(self.classes_name))
+        
+        
+
+    def __len__(self): # 데이터셋의 길이, 즉 샘플의 수를 적어주는 부분
+        return len(self.image_dir)
+
+    def __getitem__(self, idx): # 데이터셋에서  특정 1개의 샘플을 가져오는 함수 
+        img_loc = self.image_dir[idx]
+        image = Image.open(img_loc).convert("RGB")
+        # print(img_loc)
+        # image.show()
+        target = self.label[idx]
+        label = self.classes_name.index(target)
+        # print(label)
+        if self.transform is not None:
+            tensor_image = self.transform(image)
+        # label = transforms.ToTensor()(label)
+        # print(label)
+        # print(type(label))
+        return tensor_image, label
+
 if __name__ == "__main__":
     trans = transforms.Compose([transforms.ToTensor(), transforms.Resize(size=(config.IMG_HEIGH, config.IMG_WIDTH))])
 

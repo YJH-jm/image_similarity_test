@@ -41,12 +41,7 @@ if __name__ == "__main__":
     print("------------ Dataset Created ------------")
     print("------------ Creating DataLoader ------------")
    
-    # train_loader = torch.utils.data.DataLoader(
-    #     train_dataset, batch_size=config.TRAIN_BATCH_SIZE, shuffle=True, drop_last=True, pin_memory=True
-    # ) 
-    # train_loader = torch.utils.data.DataLoader(
-    #     train_dataset, batch_size=config.TRAIN_BATCH_SIZE, shuffle=True, drop_last=True
-    # ) 
+   
     train_loader = torch.utils.data.DataLoader(
         train_dataset, batch_size=config.TRAIN_BATCH_SIZE, drop_last=True
     ) 
@@ -76,15 +71,10 @@ if __name__ == "__main__":
 
 
     criterion = nn.MSELoss()
-    # print("encoder.parameters() type : ", type(encoder.parameters()))
-    # print("decoder.parameters() type : ", type(decoder.parameters()))
-
-    # print("encoder.parameters() list로 변환 : \n", list(encoder.parameters())) 
-    # print("decoder.parameters() list로 변환 : \n", list(decoder.parameters()))
     autoencoder_params = list(encoder.parameters()) + list(decoder.parameters())
     optimizer = optim.AdamW(autoencoder_params, lr=config.LEARNING_RATE)
 
-    # # early_stopper = utils.EarlyStopping(patience=5, verbose=True, path=)
+    # early_stopper = utils.EarlyStopping(patience=5, verbose=True, path=)
     min_loss = 9999
 
     print("------------ Training started ------------")
@@ -112,23 +102,3 @@ if __name__ == "__main__":
 
     print("Training Done")
 
-    
-    # # encoder.load_state_dict(torch.load(config.ENCODER_MODEL_PATH))
-    # encoder.load_state_dict(torch.load(config.ENCODER_MODEL_PATH, map_location=device))
-
-    # encoder.eval()
-
-    # print("---- Creating Embeddings for the full dataset ---- ")
-
-    # embedding = train_engine.create_embedding(encoder, full_loader, config.EMBEDDING_SHAPE, device) # # EMBEDDING_SHAPE = (1, 517, 7, 7))
-    
-    
-    
-    # # Convert embedding to numpy and save them
-    # numpy_embedding = embedding.cpu().detach().numpy()
-    # print(numpy_embedding)
-    # num_images = numpy_embedding.shape[0]
-
-    # # Dump the embeddings for complete dataset, not just train
-    # flattened_embedding = numpy_embedding.reshape((num_images, -1))
-    # np.save(config.EMBEDDING_PATH, flattened_embedding)

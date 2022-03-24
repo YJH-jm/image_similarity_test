@@ -1,4 +1,3 @@
-from cv2 import transform
 import model
 import torch
 import torchvision.transforms as transforms
