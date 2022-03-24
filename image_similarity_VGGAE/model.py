@@ -55,6 +55,7 @@ class VGGEncoder(nn.Module):
         pool_indices = []
         x_current = x
         for module_encode in self.encoder:
+            print("module_encode : ", module_encode)
             output = module_encode(x_current)
             # If the module is pooling, there are two outputs, the second the pool indices
             if isinstance(output, tuple) and len(output) == 2:
@@ -65,6 +66,25 @@ class VGGEncoder(nn.Module):
 
         return x_current, pool_indices
 
+    def get_feature(self, x, layer=23):
+        x_current = x
+        idx = 0
+        for module_encode in self.encoder:
+            # print(module_encode)
+            output = module_encode(x_current)
+            if isinstance(output, tuple) and len(output) == 2:
+                x_current = output[0]
+            else:
+                x_current = output
+            
+            if idx == layer:
+                # print("in")
+                # print(x_current.shape)
+                return x_current
+
+            idx += 1
+      
+        
 class VGGDecoder(nn.Module):
     '''Decoder of code based on the architecture of VGG-16 with batch normalization.
     Args:
@@ -144,17 +164,19 @@ if __name__ == "__main__":
     img_random_VGG2 = torch.randn(1, 3, config.IMG_HEIGH, config.IMG_WIDTH)
 
     encoder = VGGEncoder()
-    
-    enc_out, pool_indices  = encoder(img_random_VGG)
-    enc_out2, pool_indices2 = encoder(img_random_VGG2)
-    print(enc_out.shape)
-    decoder = VGGDecoder(encoder.encoder)
-    dec_out = decoder(enc_out, pool_indices)
-    dec_out2 = decoder(enc_out2, pool_indices2)
+    encoder.get_feature(img_random_VGG)
+    encoder(img_random_VGG)
+    # print(encoder.get_features())
+    # enc_out, pool_indices  = encoder(img_random_VGG)
+    # enc_out2, pool_indices2 = encoder(img_random_VGG2)
+    # print(enc_out.shape)
+    # decoder = VGGDecoder(encoder.encoder)
+    # dec_out = decoder(enc_out, pool_indices)
+    # dec_out2 = decoder(enc_out2, pool_indices2)
 
     # print("dec_out : \n", dec_out)
 
-    emb = torch.cat((enc_out, enc_out2), 0)
+    # emb = torch.cat((enc_out, enc_out2), 0)
     
     # print("shape emb : ", emb.shape) # torch.Size([2, 512, 7, 7])
 
