@@ -1,3 +1,7 @@
 *.pt
 input/korean-ReID
 __pycache__
+data/models
+
+# Test 이미지 경로
+test
