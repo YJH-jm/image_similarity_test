@@ -101,4 +101,3 @@ if __name__ == "__main__":
         print(f"Epochs = [{epoch+1}/{config.EPOCHS}], Validation Loss : {val_loss}")
 
     print("Training Done")
-

@@ -19,7 +19,7 @@ FULL_BATCH_SIZE = 32
 
 TEST_DATA_PATH = "../test"
 EFFICIENTNET_MODEL_PATH = "../data/models/EfficientNet.pt"
-FEATURE_PATH = "../data/models/data_EFF_features.npy"
+FEATURE_PATH = "../data/models/EFF_features.npy"
 FEATURE_SHAPE = (1, 1280, 7, 7)
 NUM_CLASSES=1603
 

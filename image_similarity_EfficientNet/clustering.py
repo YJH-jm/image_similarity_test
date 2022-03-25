@@ -23,7 +23,7 @@ if __name__ == "__main__":
     transform = transforms.Compose([transforms.ToTensor(), transforms.Resize(size=(config.IMG_HEIGH, config.IMG_WIDTH)), transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
 
     full_dataset = data.TestDataset(config.TEST_DATA_PATH, transform)
-
+    
     print("------------ Dataset Created ------------")
 
 
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     
     
     
-    # # Convert embedding to numpy and save them
+    # # Convert features to numpy and save them
     # numpy_features = features.cpu().detach().numpy()
     # num_images = numpy_features.shape[0]
 
@@ -52,8 +52,8 @@ if __name__ == "__main__":
     # np.save(config.FEATURE_PATH, flattened_features)
 
 
-    print("Loads the feature")
-    flattened_features = np.load(config.FEATURE_PATH)
+    # print("Loads the feature")
+    # flattened_features = np.load(config.FEATURE_PATH)
     # test_image_path = "../test/korean-ReID/1/090401/IN_H00296_SN1_090401_25707.png"
     # test_image_path = "../test/korean-ReID/2/090407/IN_H00296_SN1_090407_21582.png"
     # test_image_path = "../test/korean-ReID/3/102504/IN_H00803_SN2_102504_14915.png"
@@ -63,17 +63,21 @@ if __name__ == "__main__":
     # test_image_path = "../test/korean-ReID/7/101904/IN_H00702_SN3_101904_14390.png"
     # test_image_path = "../test/korean-ReID/8/101903/IN_H00711_SN1_101903_19150.png"
     # test_image_path = "../test/korean-ReID/9/101903/IN_H00724_SN1_101903_23847.png"
-    test_image_path = "../test/korean-ReID/10/101909/IN_H00724_SN1_101909_29902.png"
-
-
-
+    # test_image_path = "../test/korean-ReID/10/101909/IN_H00724_SN1_101909_29902.png"
+    
+    # 모든 이미지를 KNN으로 clustering 하여 label과 distance 를 얻는 함수 
+    all_labels, all_img_dir = clustering_engine.get_label()
+    total_label_list, total_distance_list = clustering_engine.compute_all_similar_images(model, device, all_labels, all_img_dir)
+    
+    # 글로벌 ID 통합
+    clustering_engine.test(total_label_list, total_distance_list, all_labels, all_img_dir)
     
 
+    # clustering_engine.compute_all_similar_images(full_dataset, device)
 
 
 
 
-
-    # distance_list, indices_list = clustering_engine.compute_similar_images(config.TEST_IMAGE_PATH, config.NUM_IMAGES, embedding, device)
-    indices_list, distance_list = clustering_engine.compute_similar_images(test_image_path, flattened_features, device)
-    clustering_engine.plot_similar_images(distance_list, indices_list, 1)
+    # # distance_list, indices_list = clustering_engine.compute_similar_images(config.TEST_IMAGE_PATH, config.NUM_IMAGES, embedding, device)
+    # indices_list, distance_list = clustering_engine.compute_similar_images(test_image_path, flattened_features, device)
+    # clustering_engine.plot_similar_images(distance_list, indices_list, 1)
