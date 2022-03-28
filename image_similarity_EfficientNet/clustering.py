@@ -65,18 +65,17 @@ if __name__ == "__main__":
     # test_image_path = "../test/korean-ReID/9/101903/IN_H00724_SN1_101903_23847.png"
     # test_image_path = "../test/korean-ReID/10/101909/IN_H00724_SN1_101909_29902.png"
     
-    # 모든 이미지를 KNN으로 clustering 하여 label과 distance 를 얻는 함수 
+    # 모든 이미지를 KNeighbors 로 clustering 하여 label과 distance 를 얻는 함수 
     all_labels, all_img_dir = clustering_engine.get_label()
     total_label_list, total_distance_list = clustering_engine.compute_all_similar_images(model, device, all_labels, all_img_dir)
-    
+    # K-means 알고리즘으로 grouping 한 label 획득
+    group_label = clustering_engine.clustering()
+
     # 글로벌 ID 통합
-    clustering_engine.test(total_label_list, total_distance_list, all_labels, all_img_dir)
+    clustering_engine.test(total_label_list, total_distance_list, all_labels, all_img_dir, group_label)
     
 
     # clustering_engine.compute_all_similar_images(full_dataset, device)
-
-
-
 
     # # distance_list, indices_list = clustering_engine.compute_similar_images(config.TEST_IMAGE_PATH, config.NUM_IMAGES, embedding, device)
     # indices_list, distance_list = clustering_engine.compute_similar_images(test_image_path, flattened_features, device)
