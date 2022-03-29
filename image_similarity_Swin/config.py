@@ -18,8 +18,8 @@ FULL_BATCH_SIZE = 32
 ###### Train and Test time #########
 
 TEST_DATA_PATH = "../test"
-EFFICIENTNET_MODEL_PATH = "../data/models/EfficientNet.pt"
-FEATURE_PATH = "../data/models/EFF_features.npy"
+EFFICIENTNET_MODEL_PATH = "../data/models/Swin.pt"
+FEATURE_PATH = "../data/models/Swin_features.npy"
 # FEATURE_PATH = "../data/models/EFF_features2.npy"
 
 FEATURE_SHAPE = (1, 1280, 7, 7)

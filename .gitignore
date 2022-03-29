@@ -4,5 +4,6 @@ __pycache__
 data/models
 
 # Test 이미지 경로
-test
+test*
 test_backup
+test2_backup
