@@ -13,7 +13,7 @@ def train_step(model, train_loader, criterion, optimizer, device):
     # print(device)
 
     for batch_idx, (train_img, target) in enumerate(train_loader):
-        # print(f"Steps : [{batch_idx}]")
+        print(f"Steps : [{batch_idx}]")
         train_img = train_img.to(device)
         target = target.to(device)
 
@@ -73,3 +73,10 @@ def create_embedding(encoder, full_loader, embedding_dim, device): # save image 
     print("최종 embedding shape : ", embedding.shape)
 
     return embedding
+
+'''
+optimizer_ft = optim_name([
+             {'params': base_params, 'lr': 0.1*opt.lr},
+             {'params': classifier_params, 'lr': opt.lr}
+         ], weight_decay=5e-4, momentum=0.9, nesterov=True)
+'''
