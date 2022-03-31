@@ -90,22 +90,3 @@ if __name__ == "__main__":
             print("min_loss : ", min_loss )
 
         print(f"Epochs = [{epoch+1}/{config.EPOCHS}], Validation Loss : {val_loss}, Accuracy : {val_accuracy}")
-
-    # print("Training Done")
-
-    # encoder.eval()
-
-    # print("---- Creating Embeddings for the full dataset ---- ")
-
-    # embedding = train_engine.create_embedding(encoder, full_loader, config.EMBEDDING_SHAPE, device) # # EMBEDDING_SHAPE = (1, 517, 7, 7))
-    
-    
-    
-    # # Convert embedding to numpy and save them
-    # numpy_embedding = embedding.cpu().detach().numpy()
-    # print(numpy_embedding)
-    # num_images = numpy_embedding.shape[0]
-
-    # # Dump the embeddings for complete dataset, not just train
-    # flattened_embedding = numpy_embedding.reshape((num_images, -1))
-    # np.save(config.EMBEDDING_PATH, flattened_embedding)

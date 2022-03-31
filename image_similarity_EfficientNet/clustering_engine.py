@@ -21,13 +21,9 @@ def load_image_tensor(image_path, device):
 
 def create_feature(model, full_loader, feature_dim, device): # save image feature representations of all images in the dataset
     
-    # Load the state dict of encoder
     
-    # encoder.load_state_dict(torch.load(config.ENCODER_MODEL_PATH, map_location=device))
     model.eval()
-
     features = torch.randn(feature_dim)
-    # print("check : ", embedding.shape)
     
     with torch.no_grad():
         for _, (train_img, target) in enumerate(full_loader):
@@ -76,9 +72,6 @@ def compute_similar_images(model, image_path, features, device):
 
 
 def compute_all_similar_images(model, device, all_labels, all_img_dir):
-    
-    # model = EfficientNet.from_pretrained('efficientnet-b0', num_classes=config.NUM_CLASSES) #
-    # model.load_state_dict(torch.load(config.EFFICIENTNET_MODEL_PATH , map_location=device))
     model.eval()
     model.to(device)
     
@@ -128,7 +121,6 @@ def plot_similar_images(distance_list, indices_list, choice): # plot_similar_ima
         title = str(label[img_idx])+'\n' + str(distance[index])
         plt.title(title)
         plt.imshow(img)
-    # plt.savefig('save.jpg')
     plt.show()
 
 def test(total_label_list, total_distance_list, all_labels, all_img_dir, group_label):
@@ -228,12 +220,4 @@ def clustering():
     return km.labels_
  
 if __name__ == "__main__":
-    # get_label()
-
-    clustering()
-    # model = EfficientNet()
-    
-    
-    # img_random_VGG = torch.randn(1, 3, config.IMG_HEIGH, config.IMG_WIDTH)
-    # img_random_VGG2 = torch.randn(1, 3, config.IMG_HEIGH, config.IMG_WIDTH)
-
+    pass
